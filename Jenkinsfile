@@ -3,13 +3,15 @@ pipeline {
     environment {
         //be sure to replace "willbla" with your own Docker Hub username
         DOCKER_IMAGE_NAME = "anshulktripathi/train-schedule"
-    }
-    stage('SonarQube analysis') {
-    withSonarQubeEnv() { // Will pick the global server connection you have configured
-      sh './gradlew sonarqube'
+    }    
+    stages {
+        stage('SonarQube analysis') {
+            steps {
+            withSonarQubeEnv() { // Will pick the global server connection you have configured
+            sh './gradlew sonarqube'
     }
   }
-    stages {
+        }
         stage('Build') {
             steps {
                 echo 'Running build automation'
